@@ -1,0 +1,8 @@
+'use strict';
+const people=document.querySelector('#people');
+const hours=document.querySelector('#hours');
+function calculate(){const p=Number(people.value),h=Number(hours.value),total=p*h*20;document.querySelector('#people-value').value=p;document.querySelector('#hours-value').value=h;document.querySelector('#capacity').textContent=total.toLocaleString('en');document.querySelector('#annual').textContent=(total*12).toLocaleString('en');}
+people.addEventListener('input',calculate);hours.addEventListener('input',calculate);
+document.querySelectorAll('[data-service]').forEach(link=>link.addEventListener('click',()=>{document.querySelector('#interest').value=link.dataset.service;}));
+document.querySelector('#draft-button').addEventListener('click',()=>{const idea=document.querySelector('#brief').value.trim();document.querySelector('#prepared-brief').value=`Project interest: ${document.querySelector('#interest').value}\n\nWhat we would like to improve:\n${idea||'We would like help identifying a practical opportunity for our business.'}\n\nNext step: discuss our current workflow, existing tools, and goals.`;document.querySelector('#brief-result').hidden=false;document.querySelector('#copy-status').textContent='';document.querySelector('#prepared-brief').focus();});
+document.querySelector('#copy-button').addEventListener('click',async()=>{const field=document.querySelector('#prepared-brief');try{await navigator.clipboard.writeText(field.value);document.querySelector('#copy-status').textContent='Copied.';}catch{field.focus();field.select();document.querySelector('#copy-status').textContent='Select and copy the brief above.';}});
