@@ -7,3 +7,9 @@ Verified the time calculator changes from 120 to 200 hours when the person count
 Contact is a local brief generator. It does not submit an inquiry or send an email. Business name is a working name pending the user's choice. Illustrative savings are explicitly labeled and not presented as actual client outcomes.
 
 Rerun: serve `dist/` and inspect the widths and controls above.
+
+## Opening redesign, 2026-10-01
+
+Replaced the plain opening with an ink hero, lavender accents, and an interactive custom-app workspace. Removed the numbered workflow strip and the decorative service, section, and process numbers. Rebuilt the client area with larger official logos in a lavender band.
+
+Chrome verification repeated at 1440, 1024, 768, 390, and 360 pixels: no horizontal overflow, asset failures, or page errors. Invoice/onboarding/reporting tab selection, keyboard arrow navigation, and the sample approval action passed. Existing calculator, service selection, project brief, and FAQ interactions still passed.
