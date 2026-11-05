@@ -16,16 +16,27 @@ workflows, custom in-house apps, software cost review, and team adoption. Moved 
 ## Pipeline
 - CRM brand `consulting-ai`, source `consulting-ai-sdr`. Leads come from the nightly
   `portfolio-crm-prospecting` job (section 8 holds the ICP).
-- **ICP updated 2026-10-25 (JP):** primary target is now CEO, President, Owner, COO, VP Operations,
-  **VP Finance, CFO** (new title track, added 2026-10-25) at companies with **30-300 employees**
-  (new primary band) in Canada and the US. Ideally not tech companies -- excludes tech companies and
-  consultancies (NAICS exclusion carried over unchanged). Targets professional firms and traditional
-  businesses (manufacturing, distribution, retail, logistics, construction, healthcare clinics).
-  The old 60-1,000 lane and the 15-59-employee/$10M-revenue undercount lane stay as secondary lanes
-  (still valid, lower priority) -- see section 8 for the full lane breakdown.
-- As of 2026-10-25 the CRM already holds 1,048 consulting-ai contacts from the nightly job
-  (2026-10-09 to date); 673 of those already sit at companies in the new 30-300 band. The CFO/VP
-  Finance track was essentially never pulled before (2 incidental hits out of 1,048).
+- **ICP updated 2026-10-28 (Grok CEO):** owners and CFOs/finance leaders at non-tech companies
+  in Canada and the US, with one size band: **under 500 employees by the best headcount signal**.
+  Excludes tech companies and consultancies (NAICS exclusion carried over unchanged). Targets
+  professional firms and traditional businesses (manufacturing, distribution, retail, logistics,
+  construction, healthcare clinics).
+- **Buyer titles:** CEO, President, Owner, COO, VP Operations, VP Finance, CFO, with existing title
+  aliases retained. French titles include PDG, president, proprietaire, directeur financier,
+  VP finances, plus the existing operations and finance equivalents.
+- **Search eligibility:** Apollo `estimated_num_employees` >= 30, or **15-29 Apollo employees with
+  revenue >= $10M** for field-worker industries that LinkedIn/Apollo undercount. Search the main
+  band with `organization_num_employees_ranges: ["30,499"]` and the undercount entry with
+  `["15,29"]` plus `revenue_range: {"min": 10000000}`. These are two search entries into the same
+  under-500 ICP, with no secondary size band.
+- **Best headcount signal:** `max(Apollo estimated_num_employees, revenue-band headcount estimate,
+  any stored registry employee count)`, using available headcount signals. Revenue must be translated
+  to a supported headcount estimate, never compared as dollars to employees. If no revenue-derived
+  estimate is stored or supported, treat that signal as unknown, not as evidence of a small workforce.
+  **Reject for upper size only when best signal >= 500**, including exactly 500. A low Apollo count
+  cannot override a larger revenue-derived or registry count. The $10M undercount threshold alone
+  establishes search eligibility, not the final headcount. Do not use a separate revenue ceiling as
+  an upper-size rejection rule.
 - Nothing sends to these leads yet. A cold send to a real person is JP's gate.
 
 Never use em-dashes.
